@@ -1,20 +1,142 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090B10"><title>SIGNAL//SHIFT — Digital Modulation Playground</title>
-<link rel="stylesheet" href="./style.css"><script defer src="./app.js"></script>
-</head><body data-mode="ASK"><main>
-<header class="mast"><span class="signature" aria-hidden="true">∿</span><span>WCM555 / COMMUNICATIONS SYSTEMS / INTERACTIVE LAB</span></header>
-<section class="hero"><div class="hero-copy"><h1 aria-label="SIGNAL//SHIFT">SIGNAL<span>//</span><br>SHIFT</h1><p>One bitstream. Three ways to transmit it.</p></div>
-<figure class="sculpture"><svg id="sculpture" viewBox="0 0 590 236" aria-hidden="true"></svg><figcaption>Digital Modulation Playground</figcaption></figure></section>
-<div class="tabs" role="group" aria-label="Modulation mode"></div>
-<div class="lab"><section class="instrument"><div class="section-head"><h2>Signal laboratory</h2><span class="status"><i></i> Live signal</span></div>
-<div class="channel"><div class="channel-head"><h3>Binary input</h3><span>Logic level</span></div><div class="plot"><canvas id="binary" aria-label="Binary input logic level versus time in milliseconds"></canvas></div></div>
-<div class="channel"><div class="channel-head"><h3>Modulated output <b id="tag"></b></h3><span>Normalized amplitude</span></div><div class="plot"><canvas id="carrier" aria-label="Normalized modulated output amplitude versus time in milliseconds"></canvas></div></div>
-</section><section class="controls"><div class="section-head"><h2>Signal controls</h2><button id="reset"><span aria-hidden="true">↺</span> Reset</button></div>
-<label for="bits">Binary sequence</label><input id="bits" value="10110010" maxlength="64" type="text" spellcheck="false" autocomplete="off" aria-describedby="hint"><small id="hint" aria-live="polite">Enter up to 64 bits using 0 and 1.</small>
-<div class="slider"><label for="fc">Carrier frequency</label><output id="fcOut" for="fc"></output><input id="fc" type="range" min="1" max="10" step="0.1" value="2"><small>1 kHz</small><small>10 kHz</small></div>
-<div class="slider"><label for="rate">Bit rate</label><output id="rateOut" for="rate"></output><input id="rate" type="range" min="100" max="1000" step="10" value="500"><small>100 bps</small><small>1000 bps</small></div>
-<div class="metrics"><div>Carrier frequency<strong><b id="freqVal"></b> kHz</strong></div><div>Bit rate<strong><b id="rateVal"></b> bps</strong></div><div>Bit duration<strong><b id="durVal"></b> ms</strong></div></div></section></div>
-<section class="decode"><h2>Decode the signal<span>.</span></h2><div class="decode-grid"><article><h3 id="theory"></h3><p id="desc"></p><h4>Application</h4><p id="use"></p></article><article><h4>Signal equation</h4><div id="eq"></div><p id="legend"></p></article><dl><div><dt>0</dt><dd id="zero"></dd></div><div><dt>1</dt><dd id="one"></dd></div></dl></div></section>
-<footer><span>SIGNAL//SHIFT</span></footer></main></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#090B10" />
+    <title>SIGNAL//SHIFT — Digital Modulation Playground</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body data-mode="ASK">
+    <main>
+      <header class="mast">
+        <span class="signature" aria-hidden="true">∿</span
+        ><span>WCM555 / COMMUNICATIONS SYSTEMS / INTERACTIVE LAB</span>
+      </header>
+      <section class="hero">
+        <div class="hero-copy">
+          <h1 aria-label="SIGNAL//SHIFT">SIGNAL<span>//</span><br />SHIFT</h1>
+          <p>One bitstream. Three ways to transmit it.</p>
+        </div>
+        <figure class="sculpture">
+          <svg id="sculpture" viewBox="0 0 590 236" aria-hidden="true"></svg>
+          <figcaption>Digital Modulation Playground</figcaption>
+        </figure>
+      </section>
+      <div class="tabs" role="group" aria-label="Modulation mode"></div>
+      <div class="lab">
+        <section class="instrument">
+          <div class="section-head">
+            <h2>Signal laboratory</h2>
+            <span class="status"><i></i> Live signal</span>
+          </div>
+          <div class="channel">
+            <div class="channel-head">
+              <h3>Binary input</h3>
+              <span>Logic level</span>
+            </div>
+            <div class="plot">
+              <canvas
+                id="binary"
+                aria-label="Binary input logic level versus time in milliseconds"
+              ></canvas>
+            </div>
+          </div>
+          <div class="channel">
+            <div class="channel-head">
+              <h3>Modulated output <b id="tag"></b></h3>
+              <span>Normalized amplitude</span>
+            </div>
+            <div class="plot">
+              <canvas
+                id="carrier"
+                aria-label="Normalized modulated output amplitude versus time in milliseconds"
+              ></canvas>
+            </div>
+          </div>
+        </section>
+        <section class="controls">
+          <div class="section-head">
+            <h2>Signal controls</h2>
+            <button id="reset"><span aria-hidden="true">↺</span> Reset</button>
+          </div>
+          <label for="bits">Binary sequence</label
+          ><input
+            id="bits"
+            value="10110010"
+            maxlength="64"
+            type="text"
+            spellcheck="false"
+            autocomplete="off"
+            aria-describedby="hint"
+          /><small id="hint" aria-live="polite"
+            >Enter up to 64 bits using 0 and 1.</small
+          >
+          <div class="slider">
+            <label for="fc">Carrier frequency</label
+            ><output id="fcOut" for="fc"></output
+            ><input
+              id="fc"
+              type="range"
+              min="1"
+              max="10"
+              step="0.1"
+              value="2"
+            /><small>1 kHz</small><small>10 kHz</small>
+          </div>
+          <div class="slider">
+            <label for="rate">Bit rate</label
+            ><output id="rateOut" for="rate"></output
+            ><input
+              id="rate"
+              type="range"
+              min="100"
+              max="1000"
+              step="10"
+              value="500"
+            /><small>100 bps</small><small>1000 bps</small>
+          </div>
+          <div class="metrics">
+            <div>
+              Carrier frequency<strong><b id="freqVal"></b> kHz</strong>
+            </div>
+            <div>
+              Bit rate<strong><b id="rateVal"></b> bps</strong>
+            </div>
+            <div>
+              Bit duration<strong><b id="durVal"></b> ms</strong>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section class="decode">
+        <h2>Decode the signal<span>.</span></h2>
+        <div class="decode-grid">
+          <article>
+            <h3 id="theory"></h3>
+            <p id="desc"></p>
+            <h4>Application</h4>
+            <p id="use"></p>
+          </article>
+          <article>
+            <h4>Signal equation</h4>
+            <div id="eq"></div>
+            <p id="legend"></p>
+          </article>
+          <dl>
+            <div>
+              <dt>0</dt>
+              <dd id="zero"></dd>
+            </div>
+            <div>
+              <dt>1</dt>
+              <dd id="one"></dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+      <footer><span>SIGNAL//SHIFT</span></footer>
+    </main>
+  </body>
+</html>
